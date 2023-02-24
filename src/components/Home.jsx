@@ -6,6 +6,9 @@ import { client } from "./common/client";
 import { useNavigate } from "react-router-dom";
 import styles from "./css/Home.module.css"
 
+import {AiOutlineUserAdd} from "react-icons/ai"
+import {FiUserPlus} from "react-icons/fi"
+
 import io from "socket.io-client";
 const socket=io.connect("http://localhost:1234");
 
@@ -86,11 +89,11 @@ export const Home=()=>{
 
             const newdate = year + "/" + month + "/" + day;
 
-            await client.put("/pushTextToRoom/"+_id, {Text:{message:message , name:decodedToken.username  , imageUrl:decodedToken.avatarImageUrl , date:newdate}})
+            await client.put("/pushTextToRoom/"+_id, {Text:{message:message , name:decodedToken.username  , imageUrl:decodedToken.avatarImageUrl , date:newdate , userId:userId}})
 
-            socket.emit("send_messages",{room:selectedRoom[0].roomId , message:message , imageUrl:decodedToken.avatarImageUrl , date:newdate})
+            socket.emit("send_messages",{room:selectedRoom[0].roomId , message:message , name:decodedToken.username ,imageUrl:decodedToken.avatarImageUrl , date:newdate , userId:userId})
 
-            setMessageList((list)=>[...list , {room:selectedRoom[0].roomId , message:message , imageUrl:decodedToken.avatarImageUrl , date:newdate}])
+            setMessageList((list)=>[...list , {room:selectedRoom[0].roomId , message:message , name:decodedToken.username , imageUrl:decodedToken.avatarImageUrl , date:newdate , userId:userId}])
 
             messageInput.current.value="";
         }
@@ -122,11 +125,25 @@ export const Home=()=>{
 
             <div className={styles.header}> 
                 <img className={styles.avatarImg} src={avatarImg}/>
+
                 <div className={styles.name}>{decodedToken.email}</div>
+
                 <div className={styles.name}>{decodedToken.username}</div>
+
                 <button className={styles.Button} onClick={Logout}>Log out</button>
-                <Link to="/addfriend" className={styles.text}>Add Friend</Link>
-                <Link to="/incomefriendrequest" className={styles.text}>Incoming friend request</Link>
+
+                <div className={styles.headerEl}>
+                    <AiOutlineUserAdd className={styles.icon}></AiOutlineUserAdd>
+
+                    <Link to="/addfriend" className={styles.text}>Add Friend</Link>
+                </div>
+
+                <div className={styles.headerEl}>
+                    <FiUserPlus className={styles.icon}></FiUserPlus>
+
+                    <Link to="/incomefriendrequest" className={styles.text}>Incoming friend request</Link>
+                </div>
+
             </div>
 
             <div className={styles.body}>
@@ -156,13 +173,16 @@ export const Home=()=>{
                         <div className={styles.insideCurrentChatBody}>
                             {
                                 messageList && messageList.map((item,i)=>{
-                                    // console.log("image:",item.imageUrl)
+                                    console.log(item)
                                     return(
-                                        <div className={styles.messageContainerOther} key={i}>
-                                            <img className={styles.avatarImg} src={item.imageUrl}/>
-                                            <div className={styles.messageName}>{item.name}</div>
-                                            <div className={styles.messageText}>{item.message}</div>
-                                            <div className={styles.messageDate}>{item.date}</div>
+                                        <div className={styles.messageContainer} key={i}>
+                                            <div className={item.userId==userId ? styles.messageContainerMe : styles.messageContainerOther } key={i}>
+                                                <img className={styles.avatarImg} src={item.imageUrl}/>
+                                                <div className={styles.messageName}>{item.name}</div>
+                                                <div className={styles.messageText}>{item.message}</div>
+                                                <div className={styles.messageDate}>{item.date}</div>
+                                            </div>
+
                                         </div>
                                     )
                                 })

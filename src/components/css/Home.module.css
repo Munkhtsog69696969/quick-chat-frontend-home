@@ -35,7 +35,7 @@
 
 .text{
   color: white;
-  margin: 2%;
+  /* margin: 2%; */
   font-weight: 400;
   text-decoration: none;
 }
@@ -175,6 +175,26 @@
   /* align-items: center; */
 }
 
+.messageContainerMe{
+  background-color: rgb(67, 67, 246);
+  color: rgb(255, 255, 255);
+  width: 100%;
+  margin: 10px;
+  width: fit-content;
+  max-width: 100%;
+  word-break: break-all;
+  border-radius: 15px;
+  border: 2px solid rgb(92, 92, 92);
+  padding: 10px;
+  display: flex;
+  position: relative;
+}
+
+.messageContainer{
+  position: relative;
+  /* background-color: white; */
+}
+
 .messageText{
   width: fit-content;
 }
@@ -192,4 +212,18 @@
   left: 5;
   top: 0;
   font-size:10px;
+}
+
+.icon{
+  display: inline-block;
+  color: white;
+  font-size: 20px;
+}
+
+.headerEl{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  margin: 2%;
 }
