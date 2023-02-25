@@ -226,4 +226,22 @@
   justify-content: center;
   flex-direction: row;
   margin: 2%;
+  position: relative;
 }
+
+.notifContainer{
+  position: absolute;
+  background-color: orangered;
+  color: white;
+  width: 16%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  left: 10%;
+  top: -15%;
+  font-size: small;
+  opacity: 1;
+}
+

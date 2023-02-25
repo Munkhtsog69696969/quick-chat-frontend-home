@@ -8,6 +8,7 @@ import styles from "./css/Home.module.css"
 
 import {AiOutlineUserAdd} from "react-icons/ai"
 import {FiUserPlus} from "react-icons/fi"
+import {IoMdNotificationsOutline} from "react-icons/io"
 
 import io from "socket.io-client";
 const socket=io.connect("http://localhost:1234");
@@ -142,6 +143,14 @@ export const Home=()=>{
                     <FiUserPlus className={styles.icon}></FiUserPlus>
 
                     <Link to="/incomefriendrequest" className={styles.text}>Incoming friend request</Link>
+                </div>
+
+                <div className={styles.headerEl}>
+                    <IoMdNotificationsOutline className={styles.icon}></IoMdNotificationsOutline>
+
+                    <div className={styles.text}>Notifications</div>
+
+                    <div className={styles.notifContainer}>1</div>
                 </div>
 
             </div>
