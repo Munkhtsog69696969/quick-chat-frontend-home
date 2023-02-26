@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const client = axios.create({
-    baseURL: "http://localhost:8080",
+    baseURL: "https://quick-chat-backend4.onrender.com",
     headers: {
         Accept: "application/json",
         // Authorization:localStorage.getItem("token")
