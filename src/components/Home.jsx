@@ -11,7 +11,12 @@ import {FiUserPlus} from "react-icons/fi"
 import {IoMdNotificationsOutline} from "react-icons/io"
 
 import io from "socket.io-client";
-const socket=io.connect("https://quick-chat-socket5.onrender.com");
+const socket=io.connect("https://quick-chat-socket5.onrender.com",{
+    withCredentials: true,
+    extraHeaders: {
+      "my-custom-header": "abcd"
+    }
+});
 
 export const Home=()=>{
     const token=localStorage.getItem("token");
