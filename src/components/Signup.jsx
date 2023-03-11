@@ -69,7 +69,7 @@ export const Signup=()=>{
 
                 <button className={styles.Button} onClick={()=>Signup()}>Create new user</button>
 
-                <Link to="/login">already have an account? Click here!</Link>
+                <Link to="/login">Already have an account? Click here!</Link>
             </div>
         </div>
     )
